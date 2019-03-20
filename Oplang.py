@@ -1,23 +1,23 @@
-from Node import Node, NodeType
+from Lexer import Lexer
+from Token import Token, TokenType
 
-block_open = ["(", "[", "{"]
-block_close = [")", "]", "}"]
-system_operators = ["+", "*", "-", "/", "print", "="]
-defined_operators = {} #Contains all custom operators defined in the Oplang code
-variables = {} #Contains all variables
+class Oplang :
+    def __init__(self, lexer: Lexer) :
+        self.lexer = lexer
+        self.current_token = self.lexer.next_token()
+    
+    def error(self) :
+        raise Exception('Invalid syntax')
 
-code = ""
-
-for line_number, line_code in enumerate(code.splitlines(), 1) :
-    tokenized_code = line_code.split()
-    current_node = Node(NodeType.UNKNOWN)
-
-    for token in tokenized_code :
-        if token in system_operators or token in defined_operators :
-            if current_node.node_type == NodeType.UNKNOWN :
-                current_node.node_type = NodeType.OPERATOR
-                current_node.value = token
-                
-            else :
-                print("Error on line " + line_number)
-        else token in block_open :
+    def eat(self, token_type: TokenType) :
+        if self.current_token.type == token_type :
+            self.current_token = self.lexer.next_token()
+        else :
+            self.error()
+    
+    def factor(self) :
+        token = self.current_token
+        self.eat(TokenType.INTEGER)
+        return token.value()
+    
+    def term(self) 
