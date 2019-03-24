@@ -7,6 +7,8 @@ class TokenType(Enum) :
     MUL = 4
     DIV = 5
     EOF = 6
+    PAR_OPEN = 7
+    PAR_CLOSE = 8
 
 class NodeType(Enum) :
     VALUE = 1

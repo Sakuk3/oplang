@@ -2,7 +2,7 @@ from Token import Token, TokenType
 
 class Lexer :
     def __init__(self, text: str) :
-        self.text = text.strip()
+        self.text = text
         self.pos = 0
         self.current_char = self.text[0]
 
@@ -17,6 +17,10 @@ class Lexer :
         else :
             self.current_char = self.text[self.pos]
     
+    def skip_white(self) :
+        while self.current_char is not None and self.current_char.isspace() :
+            self.advance()
+    
     def integer(self) :
         result = ''
 
@@ -27,7 +31,11 @@ class Lexer :
         return int(result)
 
     def next_token(self) :
-        if self.current_char is not None :
+        while self.current_char is not None :
+            if self.current_char.isspace() :
+                self.skip_white()
+                continue
+
             if self.current_char.isdigit() :
                 return Token(TokenType.INTEGER, self.integer())
             
@@ -46,6 +54,14 @@ class Lexer :
             if self.current_char == '/' :
                 self.advance()
                 return Token(TokenType.DIV, '/')
+            
+            if self.current_char == '(' :
+                self.advance()
+                return Token(TokenType.PAR_OPEN, '(')
+            
+            if (self.current_char == ')') :
+                self.advance()
+                return Token(TokenType.PAR_CLOSE, ')')
             
             self.error()
         else :

@@ -1,23 +1,21 @@
+#!/bin/python
+
 from Lexer import Lexer
-from Token import Token, TokenType
+from Interpreter import Interpreter
 
-class Oplang :
-    def __init__(self, lexer: Lexer) :
-        self.lexer = lexer
-        self.current_token = self.lexer.next_token()
-    
-    def error(self) :
-        raise Exception('Invalid syntax')
+def main() :
+    while True :
+        try :
+            text = input('oplang> ')
+        except EOFError : break
 
-    def eat(self, token_type: TokenType) :
-        if self.current_token.type == token_type :
-            self.current_token = self.lexer.next_token()
-        else :
-            self.error()
-    
-    def factor(self) :
-        token = self.current_token
-        self.eat(TokenType.INTEGER)
-        return token.value()
-    
-    def term(self) 
+        if not text : continue
+
+        lexer = Lexer(text)
+        interpreter = Interpreter(lexer)
+        result = interpreter.expr()
+
+        print(result)
+
+if __name__ == '__main__' :
+    main()
