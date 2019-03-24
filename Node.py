@@ -1,7 +1,8 @@
+from __future__ import annotations
 from Constants import NodeType
 
 class Node :
-    def __init__(self, node_type: NodeType, value: str = None, left_child: Node = None, right_child: Node = None, parent: Node = None) :
+    def __init__(self, node_type: NodeType, value: str = None, left_child: 'Node' = None, right_child: 'Node' = None, parent: 'Node' = None) :
         self.node_type = node_type
         self.value = value
         self.left_child = left_child

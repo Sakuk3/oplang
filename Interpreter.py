@@ -1,13 +1,11 @@
 from Lexer import Lexer
 from Token import Token, TokenType as TT
-from Node import Node, NodeType as NT
+from Node import NodeType as NT
 
 class Interpreter :
     def __init__(self, lexer: Lexer) :
         self.lexer = lexer
         self.current_token = self.lexer.next_token()
-        self.current_node = Node(NT.UNKNOWN)
-        self.root_node = None
     
     def error(self) :
         raise Exception('Invalid syntax')
