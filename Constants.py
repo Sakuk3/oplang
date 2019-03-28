@@ -14,6 +14,7 @@ class NodeType(Enum) :
     VALUE = 1
     OPERATOR = 2
     UNKNOWN = 3
+    VARIABLE = 4
 
 class VariableScope(Enum) :
     GLOBAL = 1

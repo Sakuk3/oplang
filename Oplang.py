@@ -1,7 +1,9 @@
 #!/bin/python
 
 from Lexer import Lexer
-from Interpreter import Interpreter
+from Parser import Parser
+from Interpreter import Interpeter
+from Node import Node
 
 def main() :
     while True :
@@ -12,8 +14,10 @@ def main() :
         if not text : continue
 
         lexer = Lexer(text)
-        interpreter = Interpreter(lexer)
-        result = interpreter.expr()
+        parser = Parser(lexer)
+        root_node = parser.expr()
+        interpreter = Interpeter()
+        result = interpreter.walk_numeric(root_node)
 
         print(result)
 

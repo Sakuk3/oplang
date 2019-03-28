@@ -2,29 +2,21 @@ from __future__ import annotations
 from Constants import NodeType
 
 class Node :
-    def __init__(self, node_type: NodeType, value: str = None, left_child: 'Node' = None, right_child: 'Node' = None, parent: 'Node' = None) :
+    __num = 0
+
+    def __init__(self, node_type: NodeType, value: str = None, left_child: 'Node' = None, right_child: 'Node' = None) :
         self.node_type = node_type
         self.value = value
         self.left_child = left_child
         self.right_child = right_child
-        self.parent = parent
+        self.num = self.__num = self.__num + 1
     
-    @property
-    def left_child(self) :
-        return self.left_child
-    
-    @left_child.setter
-    def left_child(self, left_child: Node) :
-        self.left_child = left_child
-
-        left_child.parent = self
-    
-    @property
-    def right_child(self) :
-        return self.right_child
-    
-    @right_child.setter
-    def right_child(self, right_child: Node) :
-        self.right_child = right_child
-
-        right_child.parent = self
+    def fill(self, child: Node) -> bool:
+        if self.left_child == None :
+            self.left_child = child
+        elif self.left_child != None and self.left_child == None :
+            self.right_child = child
+        else :
+            return True
+        
+        return False
