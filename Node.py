@@ -14,7 +14,7 @@ class Node :
     def fill(self, child: Node) -> bool:
         if self.left_child == None :
             self.left_child = child
-        elif self.left_child != None and self.left_child == None :
+        elif self.left_child != None and self.right_child == None :
             self.right_child = child
         else :
             return True
